@@ -13,9 +13,13 @@ st.set_page_config(
 )
 
 @st.cache_data
+def load_data():
+    return pd.read_csv("pyq_dataset_1500.csv")
+
 df = load_data()
 
 try:
+    
     model = joblib.load("topic_priority_model.pkl")
 
     exam_encoder = joblib.load("exam_encoder.pkl")
