@@ -13,17 +13,18 @@ st.set_page_config(
 )
 
 @st.cache_data
-def load_data():
-    return pd.read_csv("pyq_dataset_1500.csv")
-
 df = load_data()
 
 try:
     model = joblib.load("topic_priority_model.pkl")
-    encoder = joblib.load("label_encoder.pkl")
+
+    exam_encoder = joblib.load("exam_encoder.pkl")
+    subject_encoder = joblib.load("subject_encoder.pkl")
+    topic_encoder = joblib.load("topic_encoder.pkl")
+    priority_encoder = joblib.load("priority_encoder.pkl")
+
 except:
     model = None
-    encoder = None
 
 # -----------------------------
 st.sidebar.title("📚 Govt Exam AI")
@@ -38,7 +39,7 @@ page = st.sidebar.radio(
         "🤖 AI Prediction",
          "📅 Study Planner",
         
-        "🔍 Search Questions",
+        
         "ℹ About"
     ]
 )
@@ -175,11 +176,8 @@ elif page == "📚 PYQ Analysis":
         file_name="filtered_questions.csv",
         mime="text/csv"
     )
-
-
-
-
-    elif page == "📈 Trend Analysis":
+    
+elif page == "📈 Trend Analysis":
 
     st.title("📈 Topic Trend Analysis")
 
@@ -225,15 +223,15 @@ elif page == "📚 PYQ Analysis":
 
     st.dataframe(trend, use_container_width=True)
 # ======================================
-elif page == "🤖 AI Prediction":
+elif page == "📈 Trend Analysis":
 
-    st.title("🤖 AI Topic Prediction")
+    st.title("📈 Topic Trend Analysis")
 
     exam = st.selectbox(
-        "Exam",
+        "Select Exam",
         sorted(df["exam"].unique())
     )
-
+    
     subject = st.selectbox(
         "Subject",
         sorted(df[df["exam"] == exam]["subject"].unique())
