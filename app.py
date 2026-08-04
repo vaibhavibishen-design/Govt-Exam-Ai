@@ -227,9 +227,9 @@ elif page == "📈 Trend Analysis":
 
     st.dataframe(trend, use_container_width=True)
 # ======================================
-elif page == "📈 Trend Analysis":
+elif page == "🤖 AI Prediction":
 
-    st.title("📈 Topic Trend Analysis")
+    st.title("🤖 AI Topic Prediction")
 
     exam = st.selectbox(
         "Select Exam",
